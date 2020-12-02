@@ -9,19 +9,22 @@ const App = () => {
     if (event.keyCode !== 13) {
       return;
     }
-    if (isStarted) clearInterval(id);
+    if (isStarted) {
+      setStart(false);
+      clearInterval(id);
+    }
     let timeCount = Math.floor(event.target.value);
-    if (typeof timeCount === "number" && timeCount >= 0) setTime(timeCount);
-    else setTime(0);
-    setStart(true);
+    if (typeof timeCount === "number" && timeCount >= 0) {
+      setTime(timeCount);
+      setStart(true);
+    } else setTime(0);
   };
   useEffect(() => {
     id =
-      time > 0
-        ? setTimeout(() => {
-            setTime(time - 1);
-          }, 1000)
-        : null;
+      time > 0 &&
+      setTimeout(() => {
+        setTime(time - 1);
+      }, 1000);
   }, [time]);
   return (
     <div className="wrapper">

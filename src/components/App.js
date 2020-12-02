@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const id =
       time > 0 &&
-      setTimeout(() => {
+      setInterval(() => {
         setTime(time - 1);
       }, 1000);
     return () => clearInterval(id);

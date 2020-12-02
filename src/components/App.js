@@ -3,18 +3,15 @@ import "../styles/App.css";
 
 const App = () => {
   const [time, setTime] = useState(0);
-  const [isStarted, setStart] = useState(false);
+
   const handleTime = (event) => {
     if (event.keyCode !== 13) {
       return;
     }
-    if (isStarted) {
-      setStart(false);
-    }
+
     let timeCount = Math.floor(event.target.value);
     if (typeof timeCount === "number" && timeCount >= 0) {
       setTime(timeCount);
-      setStart(true);
     } else setTime(0);
   };
   useEffect(() => {

@@ -2,7 +2,6 @@ import React, { Component, useState, useEffect } from "react";
 import "../styles/App.css";
 
 const App = () => {
-  let id = null;
   const [time, setTime] = useState(0);
   const [isStarted, setStart] = useState(false);
   const handleTime = (event) => {
@@ -11,7 +10,6 @@ const App = () => {
     }
     if (isStarted) {
       setStart(false);
-      clearInterval(id);
     }
     let timeCount = Math.floor(event.target.value);
     if (typeof timeCount === "number" && timeCount >= 0) {
@@ -20,11 +18,12 @@ const App = () => {
     } else setTime(0);
   };
   useEffect(() => {
-    id =
+    const id =
       time > 0 &&
       setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    return () => clearInterval(id);
   }, [time]);
   return (
     <div className="wrapper">
